@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 @Getter
 public class Money {
-    private int value;
+    private BigDecimal value;
 
-    public Money(int amount) {
-        if (amount < 0) {
+    public Money(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("price amount have to be equal or greater than 0");
         }
         this.value = amount;

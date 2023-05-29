@@ -1,8 +1,10 @@
 package com.hexagonal.product.domain;
 
+import com.hexagonal.product.adapter.out.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+
+import java.security.InvalidParameterException;
 
 /* 도메인 엔티티를 먼저 만들고, 도메인을 중심으로 유즈케이스를 구현한다
  * 입력 유효성 검증과 달리 비즈니스 규칙은 도메인 모델의 상태에 접근해야하기 때문에 도메인 엔티티에서 구현한다.
@@ -13,15 +15,13 @@ import lombok.RequiredArgsConstructor;
 public class Product {
     private long id;
     private String name;
-    private int stock;
-    private int price;
+    private long stock;
+    private Money price;
 
-    public int takeOut(int quantity) {
-        int remainStock = this.stock - quantity;
-        if (remainStock < 0) {
-
-        }
-        return remainStock;
+    public boolean isAbleToTakeOut(long quantity) {
+        long remainStock = this.stock - quantity;
+        return remainStock >= 0;
+//            throw new InvalidParameterException("current stock is lower than request.");
     }
 
     public boolean isSoldOut() {

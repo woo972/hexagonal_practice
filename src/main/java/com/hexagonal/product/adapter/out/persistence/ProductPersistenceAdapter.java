@@ -26,8 +26,8 @@ class ProductPersistenceAdapter implements RegisterProductPort {
     private final ProductMapper productMapper;
 
 
-    public Product loadProduct(ProductId productId) {
-        ProductEntity productEntity = productRepository.findById(productId.getValue())
+    public Product loadProduct(long productId) {
+        ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(EntityNotFoundException::new);
 
         // add seller info to Product
